@@ -19,19 +19,9 @@ object AppModule {
 
     @Singleton
     @Provides
-    fun provideClient() : OkHttpClient = HttpLoggingInterceptor()
-        .apply {
-            level = HttpLoggingInterceptor.Level.BODY
-        }.let {
-            OkHttpClient.Builder().addInterceptor(it).build()
-        }
-
-    @Singleton
-    @Provides
-    fun provideArtistApi(client: OkHttpClient) : ArtistApi  = Retrofit.Builder()
+    fun provideArtistApi(): ArtistApi = Retrofit.Builder()
         .baseUrl(BASE_URL)
         .addConverterFactory(MoshiConverterFactory.create())
-        .client(client)
         .build()
         .create(ArtistApi::class.java)
 }

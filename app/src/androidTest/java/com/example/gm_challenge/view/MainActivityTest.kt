@@ -13,15 +13,8 @@ import org.junit.Test
 
 class MainActivityTest {
 
-    private lateinit var stringTyped: String
-
     @get: Rule
-    val activityRule: ActivityScenarioRule<MainActivity> = ActivityScenarioRule(MainActivity::class.java)
-
-    @Before
-    fun initValidString() {
-        stringTyped = "Test"
-    }
+    val activityRule = ActivityScenarioRule(MainActivity::class.java)
 
     @Test
     fun test_isActivityInView() {
@@ -34,16 +27,8 @@ class MainActivityTest {
     }
 
     @Test
-    fun test_visibility_buttonSearch() {
-        onView(withId(R.id.btn_search)).check(matches(isDisplayed()))
-    }
-
-    @Test
     fun test_visibility_spinner_recyclerView() {
-        onView(withId(R.id.text_edit_text))
-                .perform(typeText(stringTyped), closeSoftKeyboard())
-
-        onView(withId(R.id.btn_search)).perform(click())
+        onView(withId(R.id.text_edit_text)).perform(typeText("Mike"), closeSoftKeyboard())
 
         onView(withId(R.id.spinner)).check(matches(withEffectiveVisibility(Visibility.VISIBLE)))
 

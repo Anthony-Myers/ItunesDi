@@ -1,13 +1,9 @@
 package com.example.gm_challenge.viewmodel
 
-import androidx.databinding.ObservableField
 import androidx.lifecycle.*
-import com.example.gm_challenge.model.Result
 import com.example.gm_challenge.repository.ArtistRepository
 import com.example.gm_challenge.util.Resource
 import dagger.hilt.android.lifecycle.HiltViewModel
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 @HiltViewModel

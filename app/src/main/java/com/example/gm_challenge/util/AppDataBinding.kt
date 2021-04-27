@@ -36,6 +36,16 @@ fun MaterialTextView.formatDate(date: String) {
     text = formattedDate
 }
 
+@BindingAdapter("formatDate")
+fun MaterialTextView.formatDate(date: Date) {
+    val formattedDate = try {
+        SimpleDateFormat(FormatType.YYYY.pattern, Locale.getDefault()).format(date)
+    } catch (e: Exception) {
+        null
+    }
+    text = formattedDate
+}
+
 @BindingAdapter("isVisible")
 fun View.isVisible(visible: Boolean) {
     visibility = when (visible) {

@@ -1,6 +1,8 @@
 package com.example.gm_challenge.di
 
 import com.example.gm_challenge.service.ArtistApi
+import com.example.gm_challenge.util.DateAdapter
+import com.squareup.moshi.Moshi
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -19,9 +21,13 @@ object AppModule {
 
     @Singleton
     @Provides
-    fun provideArtistApi(): ArtistApi = Retrofit.Builder()
+    fun provideMoshi() : Moshi = Moshi.Builder().add(DateAdapter).build()
+
+    @Singleton
+    @Provides
+    fun provideArtistApi(moshi: Moshi): ArtistApi = Retrofit.Builder()
         .baseUrl(BASE_URL)
-        .addConverterFactory(MoshiConverterFactory.create())
+        .addConverterFactory(MoshiConverterFactory.create(moshi))
         .build()
         .create(ArtistApi::class.java)
 }

@@ -1,6 +1,5 @@
 package com.example.gm_challenge.repository
 
-import com.example.gm_challenge.model.Result
 import com.example.gm_challenge.service.ArtistApi
 import com.example.gm_challenge.util.Resource
 import kotlinx.coroutines.flow.flow
@@ -16,7 +15,7 @@ class ArtistRepository @Inject constructor(private val artistApi: ArtistApi) {
             val response = artistApi.fetchArtists(artistName)
             if (response.isSuccessful) {
                 val results = response.body()?.results
-                if (results != null && results.isNotEmpty()) Resource.Success(results)
+                if (results != null && results.isNotEmpty()) Resource.Success(results.sortedBy { it.releaseDate })
                 else Resource.Error("No results found for $artistName")
             } else Resource.Error("Your request produces an error")
         }
